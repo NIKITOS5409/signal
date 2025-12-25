@@ -1,0 +1,27 @@
+import openpyxl
+from openpyxl import Workbook as bg
+from openpyxl.writer.excel import save_workbook
+
+wb = bg()
+ws = wb.active
+ws.title = "НашЛист"
+ws['A1'] = "Заголовок 1"
+ws['B1'] = "Заголовок 2"
+ws['C1'] = "Заголовок 3"
+data = [
+    ["Иван", "Петров", 25],
+    ["Петр", "Петров", 35],
+    ["Мария", "Сидорова", 29]
+]
+for row in data:
+    ws.append(row)
+bg = openpyxl.load_workbook("example.xlsx")
+worksheet = bg.active
+for i in range(0, worksheet.max_row):
+    for col in worksheet.iter_cols(1,worksheet.max_column):
+        load_bg = openpyxl.load_workbook("example.xlsx")
+        ws["A2"] = "Дмитрий"
+        ws["A3"] = "Дмитрий"
+        ws["A4"] = "Дмитрий"
+        wb.save('example.xlsx')
+        print(col[i].value, end="\t\t")
